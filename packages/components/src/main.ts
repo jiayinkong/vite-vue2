@@ -1,8 +1,19 @@
-// import Vue from 'vue'
-// import App from './App.vue'
+import { VueConstructor } from 'vue';
 
-// Vue.config.productionTip = false
+import * as components from './components';
+export * from './components';
 
-// new Vue({
-//   render: h => h(App),
-// }).$mount('#app')
+export const install = function(app: VueConstructor) {
+
+  Object.keys(components).forEach((key) => {
+    const component = (components as any)[key];
+
+    if (component.install) {
+      app.use(component);
+    }
+  });
+};
+
+export default {
+  install,
+};
