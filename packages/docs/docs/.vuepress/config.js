@@ -1,45 +1,37 @@
-import { defaultTheme } from '@vuepress/theme-default'
-import { defineUserConfig } from 'vuepress/cli'
-import { viteBundler } from '@vuepress/bundler-vite'
-import { getDirname, path } from 'vuepress/utils'
+const COMPONENT_SIDEBAR = require('./constants/sidebar/components');
 
-const __dirname = getDirname(import.meta.url);
-
-export default defineUserConfig({
-  lang: 'en-US',
-
-  alias: {
-    '@assets': path.resolve(__dirname, '../src/assets'),
-    '@components': path.resolve(process.cwd(), 'node_modules/@my-lib-ui/components'),
-  },
-
-  title: 'MyLibUI',
-  description: '组件库文档',
-
-  theme: defaultTheme({
-    logo: 'https://vuejs.press/images/hero.png',
-    
-
-    navbar: [
+module.exports = {
+  title: '组件库文档',
+  description: '',
+  themeConfig: {
+    logo: '',
+    nav: [
       {
-        text: '快速上手',
-        link: '/',
+        text: '指南',
+        link: '/guide/'
       },
       {
-        text: '组件',
-        link: '/pages/Button/',
-      }
+        text: '源码',
+        link: '',
+      },
     ],
     sidebar: {
-      '/pages/': [
+      '/guide/': [
         {
-          text: 'Button',
-          link: '/pages/Button/',
+          title: '快速上手',   // 必要的
+          path: '/guide/',
+          collapsable: false, // 可选的, 默认值是 true,
+          sidebarDepth: 0,    // 可选的, 默认值是 1
+          // children: ['index.md']
         },
-        '/pages/Icon/',
+        {
+          title: '组件',
+          collapsable: false, // 可选的, 默认值是 true,
+          sidebarDepth: 0,    // 可选的, 默认值是 1
+          children: COMPONENT_SIDEBAR,
+          // initialOpenGroupIndex: -1 // 可选的, 默认值是 0
+        }
       ]
     }
-  }),
-
-  bundler: viteBundler(),
-})
+  },
+}

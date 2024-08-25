@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:components": "pnpm run -C packages/components build",
+    "build:docs": "pnpm run -C packages/docs docs:build",
+    "build:comp": "node ./scripts/build-comp.js",
+    "install:all": "node ./scripts/install-all.js",
+    "watch:comp": "node ./scripts/watch-comp.js",
+    "start:docs": "node ./scripts/start-docs.js"
   },
   "keywords": [],
   "author": "",
